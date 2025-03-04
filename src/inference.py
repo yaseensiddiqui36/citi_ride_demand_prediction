@@ -105,7 +105,7 @@ def fetch_next_hour_predictions():
     # Then filter for next hour in the DataFrame
     df = df[df["pickup_hour"] == next_hour]
 
-    print(f"Current UTC time: {now}")
+    print(f"Current New York time: {now}")
     print(f"Next hour: {next_hour}")
     print(f"Found {len(df)} records")
     return df
@@ -135,6 +135,7 @@ def fetch_hourly_rides(hours):
 
 
 def fetch_days_data(days):
+    import pytz
     current_date = pd.to_datetime(datetime.now(pytz.timezone("America/New_York")))
     fetch_data_from = current_date - timedelta(days=(365 + days))
     fetch_data_to = current_date - timedelta(days=365)
