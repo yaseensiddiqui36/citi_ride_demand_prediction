@@ -123,7 +123,7 @@ def fetch_predictions(hours):
 
 
 def fetch_hourly_rides(hours):
-    current_hour = (pd.Timestamp.now(tz="Etc/UTC") - timedelta(hours=hours)).floor("h")
+    current_hour = (pd.Timestamp.now(tz="America/New_York") - timedelta(hours=hours)).floor("h")
 
     fs = get_feature_store()
     fg = fs.get_feature_group(name=config.FEATURE_GROUP_NAME, version=1)
@@ -135,7 +135,7 @@ def fetch_hourly_rides(hours):
 
 
 def fetch_days_data(days):
-    current_date = pd.to_datetime(datetime.now(timezone.utc))
+    current_date = pd.to_datetime(datetime.now(pytz.timezone("America/New_York")))
     fetch_data_from = current_date - timedelta(days=(365 + days))
     fetch_data_to = current_date - timedelta(days=365)
     print(fetch_data_from, fetch_data_to)
