@@ -574,3 +574,34 @@ def transform_ts_data_info_features(
 
     # Return only the features DataFrame
     return final_df
+
+
+import pandas as pd
+
+def convert_pickup_hour_to_ny(df):
+    """
+    Convert the 'pickup_hour' column from GMT (UTC) to New York Eastern Time (EST/EDT).
+
+    Parameters:
+    ----------
+    df : pd.DataFrame
+        The DataFrame containing the 'pickup_hour' column.
+
+    Returns:
+    -------
+    pd.DataFrame
+        DataFrame with 'pickup_hour' converted to New York time.
+    """
+    df = df.copy()  # Avoid modifying the original DataFrame
+
+    # Ensure 'pickup_hour' is in datetime format
+    df["pickup_hour"] = pd.to_datetime(df["pickup_hour"])
+
+    # Localize to UTC if not already set
+    df["pickup_hour"] = df["pickup_hour"].dt.tz_localize("UTC")
+
+    # Convert to New York time (handles EST/EDT automatically)
+    df["pickup_hour"] = df["pickup_hour"].dt.tz_convert("America/New_York")
+
+    return df
+
