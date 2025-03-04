@@ -215,7 +215,7 @@ def load_shape_data_file(
 
 # st.set_page_config(layout="wide")
 
-current_date = pd.Timestamp.now(tz="America/New_York")
+current_date = pd.Timestamp.now(tz="Etc/UTC")
 st.title(f"New York Yellow Taxi Cab Demand Next Hour")
 st.header(f'{current_date.strftime("%Y-%m-%d %H:%M:%S")}')
 
