@@ -39,3 +39,4 @@ MODEL_NAME = "citi_bike_ride_predictor"
 MODEL_VERSION = 1
 
 FEATURE_GROUP_MODEL_PREDICTION = "citi_bike_model_prediction"
+FEATURE_GROUP_MODEL_PREDICTION_VERSION = 1
