@@ -113,38 +113,46 @@ def main():
     # ────────────────────────────────────────────────────────────────────────────
     # 1 Define the window we want (last 28 days ending 1 Apr 2025 00 UTC)
     # ────────────────────────────────────────────────────────────────────────────
-    current_date    = pd.Timestamp("2025-04-01 00:00:00", tz="UTC")
-    fetch_data_from = current_date - timedelta(days=28)
-    fetch_data_to   = current_date
-    logger.info(f"Current date  : {current_date}")
-    logger.info(f"Fetch window  : {fetch_data_from}  →  {fetch_data_to}")
+    # current_date    = pd.Timestamp("2025-04-01 00:00:00", tz="UTC")
+    # fetch_data_from = current_date - timedelta(days=28)
+    # fetch_data_to   = current_date
+    # logger.info(f"Current date  : {current_date}")
+    # logger.info(f"Fetch window  : {fetch_data_from}  →  {fetch_data_to}")
 
-    # ────────────────────────────────────────────────────────────────────────────
-    # 2 Load raw CSVs from local (abort gracefully if missing)
-    # ────────────────────────────────────────────────────────────────────────────
-    all_raw = []
-    for year, months in [
-        (2023, list(range(1, 13))),
-        (2024, list(range(1, 13))),
-        (2025, [1, 2, 3]),
-    ]:
-        try:
-            df_year = load_and_process_citibike_data_local(
-                year      = year,
-                months    = months,
-                base_path = config.LOCAL_CITIBIKE_DATA_PATH,
-            )
-            logger.info(f"  • {year}: loaded {len(df_year):,} rows")
-            all_raw.append(df_year)
-        except FileNotFoundError as e:
-            logger.warning(f"No data for {year} (months={months}): {e}")
+    # # ────────────────────────────────────────────────────────────────────────────
+    # # 2 Load raw CSVs from local (abort gracefully if missing)
+    # # ────────────────────────────────────────────────────────────────────────────
+    # all_raw = []
+    # for year, months in [
+    #     (2023, list(range(1, 13))),
+    #     (2024, list(range(1, 13))),
+    #     (2025, [1, 2, 3]),
+    # ]:
+    #     try:
+    #         df_year = load_and_process_citibike_data_local(
+    #             year      = year,
+    #             months    = months,
+    #             base_path = config.LOCAL_CITIBIKE_DATA_PATH,
+    #         )
+    #         logger.info(f"  • {year}: loaded {len(df_year):,} rows")
+    #         all_raw.append(df_year)
+    #     except FileNotFoundError as e:
+    #         logger.warning(f"No data for {year} (months={months}): {e}")
 
-    if not all_raw:
-        logger.warning("No raw data found for any year → exiting with success")
-        sys.exit(0)
+    # if not all_raw:
+    #     logger.warning("No raw data found for any year → exiting with success")
+    #     sys.exit(0)
 
-    raw_rides = pd.concat(all_raw, ignore_index=True)
-    logger.info(f"✅ Total raw rows loaded: {len(raw_rides):,}")
+    # raw_rides = pd.concat(all_raw, ignore_index=True)
+    # logger.info(f"✅ Total raw rows loaded: {len(raw_rides):,}")
+
+
+    ############################################################
+
+    raw_rides = load_and_process_citibike_data_local()    
+
+
+    ############################################################
 
     # ────────────────────────────────────────────────────────────────────────────
     # 3 Aggregate to hourly-location counts
