@@ -25,7 +25,7 @@ from pathlib import Path
 from typing import Optional, List
 import pandas as pd
 from src.config import RAW_DATA_DIR
-from src.data_utils import filter_citibike_data
+
 
 
 # ----------------------------------
@@ -127,7 +127,7 @@ def filter_citibike_data(df: pd.DataFrame, year: int, month: int) -> pd.DataFram
     df['start_station_id'] = df['start_station_id'].astype(str)
 
     # Define top 3 start station IDs (as strings for consistency)
-    top_station_ids = {'6140.05', '6948.10', '5329.03'}
+    top_station_ids = {"HB102", "JC115", "HB105", "HB101","JC066"}
     df = df[df['start_station_id'].isin(top_station_ids)]
     
 
