@@ -197,7 +197,7 @@ def main():
     # 6 Cast & insert into Hopsworks
     # ────────────────────────────────────────────────────────────────────────────
     ts_data["pickup_location_id"] = ts_data["pickup_location_id"].astype(str)
-    ts_data["rides"]              = ts_data["rides"].astype("int32")
+    ts_data["rides"]              = ts_data["rides"].astype("int64")
 
     logger.info("Writing rows to the feature-store …")
     hourly_fg.insert(ts_data, write_options={"wait_for_job": False})
