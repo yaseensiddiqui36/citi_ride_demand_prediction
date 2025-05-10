@@ -138,7 +138,7 @@ def main():
 
     # ── 1️⃣2️⃣  Cast to the FG schema and insert
     preds["pickup_location_id"] = preds["pickup_location_id"].astype(str)
-    preds["predicted_demand"]    = preds["predicted_demand"].astype("int64")
+    preds["predicted_demand"]    = preds["predicted_demand"].astype("float64")
 
     pred_fg.insert(preds, write_options={"wait_for_job": False})
     print("✅ Inference complete — predictions up to", preds["pickup_hour"].iloc[0])
