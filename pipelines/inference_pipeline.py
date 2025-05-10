@@ -116,7 +116,7 @@ def main():
     preds = get_model_predictions(model, features)
 
     # ── 9️⃣  Rename to match your FG schema
-    preds = preds.rename(columns={"predicted_demand": "predicted_rides"})
+    # preds = preds.rename(columns={"predicted_demand": "predicted_rides"})
 
     # ── 🔟  Stamp on the next‐hour timestamp
     preds["pickup_hour"] = latest_hr + timedelta(hours=1)
@@ -132,7 +132,7 @@ def main():
         features     = [
             Feature("pickup_location_id", "string"),
             Feature("pickup_hour",        "timestamp"),
-            Feature("predicted_rides",    "int64"),
+            Feature("predicted_demand",    "double"),
         ],
     )
 
