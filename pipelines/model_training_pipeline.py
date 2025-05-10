@@ -94,8 +94,8 @@ def main():
     # ────────────────────────────────────────────────────────────────────────────
     # 1️⃣ Fetch historical data (past 180 days)
     # ────────────────────────────────────────────────────────────────────────────
-    logger.info("Fetching last 180 days of rides …")
-    ts_data = fetch_days_data(180)
+    logger.info("Fetching last 360 days of rides …")
+    ts_data = fetch_days_data(360)
 
     if ts_data.empty:
         logger.warning("No data returned for past 180 days → skipping training")
@@ -144,7 +144,7 @@ def main():
     # 6️⃣ Register new model
     # ────────────────────────────────────────────────────────────────────────────
     logger.info("New model improves MAE → registering version …")
-    model_path = Path(config.MODELS_DIR) / "lgb_model.pkl"
+    model_path = Path(config.MODELS_DIR) / "citi_ride_lgb_model.pkl"
     joblib.dump(pipeline, model_path)
 
     # infer schemas

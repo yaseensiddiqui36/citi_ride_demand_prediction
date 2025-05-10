@@ -1,8 +1,8 @@
-name: taxi_rides_hourly_inference_pipeline
+name: citibike_inference_pipeline
 
 on:
   workflow_run:
-    workflows: ["taxi_rides_hourly_features_pipeline"]
+    workflows: ["itibike_feature_engineering_pipeline"]
     types:
       - completed
   workflow_dispatch: # Allows manual triggering of the workflow
