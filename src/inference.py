@@ -1,4 +1,4 @@
-# from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 
 # import hopsworks
 # import numpy as np
@@ -114,7 +114,7 @@ def load_metrics_from_registry(version=None):
 
 
 def fetch_predictions(hours):
-    current_hour = (pd.Timestamp.now(tz="Etc/UTC") - Timedelta(hours=hours)).floor("h")
+    current_hour = (pd.Timestamp.now(tz="Etc/UTC") - timedelta(hours=hours)).floor("h")
 
     fs = get_feature_store()
     fg = fs.get_feature_group(name=config.FEATURE_GROUP_MODEL_PREDICTION, version=1)
@@ -237,7 +237,7 @@ def main():
 
     # 2) sliding window bounds
     window_size  = 24 * 28
-    fetch_from   = latest_hr - pd.Timedelta(hours=window_size + 1)
+    fetch_from   = latest_hr - pd.timedelta(hours=window_size + 1)
     fetch_to     = latest_hr
 
     # 3) fetch raw timeseries
@@ -256,7 +256,7 @@ def main():
     pipeline = load_model_from_registry()
     preds    = get_model_predictions(pipeline, feats)
     preds    = preds.rename(columns={"predicted_demand": "predicted_rides"})
-    preds["pickup_hour"] = latest_hr + pd.Timedelta(hours=1)
+    preds["pickup_hour"] = latest_hr + pd.timedelta(hours=1)
 
     # 6) write back
     from hsfs.feature import Feature
@@ -274,7 +274,7 @@ def main():
         ]
     )
     preds["pickup_location_id"] = preds["pickup_location_id"].astype(str)
-    preds["predicted_rides"]    = preds["predicted_rides"].astype("int32")
+    preds["predicted_rides"]    = preds["predicted_rides"].astype("int64")
     pred_fg.insert(preds, write_options={"wait_for_job": False})
 
     print("✅ Done, predictions up to", preds["pickup_hour"].iloc[0])

@@ -80,7 +80,7 @@ import src.config as config
 from src.data_utils import transform_ts_data_info_features_and_target
 from src.inference import fetch_days_data, get_hopsworks_project, load_metrics_from_registry
 from src.pipeline_utils import get_pipeline
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 # ────────────────────────────────────────────────────────────────────────────────
 # Logging
