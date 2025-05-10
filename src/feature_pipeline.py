@@ -95,7 +95,7 @@ import pandas as pd
 
 import src.config as config
 from src.data_utils import (
-    load_and_process_citibike_data_from_local,
+    load_and_process_citibike_data_local,
     transform_raw_data_into_ts_data,
 )
 

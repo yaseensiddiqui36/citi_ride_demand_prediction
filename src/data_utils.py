@@ -12,6 +12,22 @@ import requests
 
 from src.config import RAW_DATA_DIR
 
+import pandas as pd
+from pathlib import Path
+from datetime import datetime
+from zipfile import ZipFile
+from io import TextIOWrapper
+
+import zipfile
+import requests
+import shutil
+from pathlib import Path
+from typing import Optional, List
+import pandas as pd
+from src.config import RAW_DATA_DIR
+from src.data_utils import filter_citibike_data
+
+
 # ----------------------------------
 # 1. Fetch raw Citi Bike trip data
 # ----------------------------------
@@ -572,11 +588,6 @@ import zipfile
 TOP_STATIONS = {"HB102", "JC115", "HB105", "HB101","JC066"}  # already defined earlier
 
 
-import pandas as pd
-from pathlib import Path
-from datetime import datetime
-from zipfile import ZipFile
-from io import TextIOWrapper
 
 def load_and_process_citibike_data_local(base_path: str = "../data/raw", months_back: int = 13) -> pd.DataFrame:
     standard_columns = [
