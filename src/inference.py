@@ -81,15 +81,15 @@
 #     return model
 
 
-# def load_metrics_from_registry(version=None):
+def load_metrics_from_registry(version=None):
 
-#     project = get_hopsworks_project()
-#     model_registry = project.get_model_registry()
+    project = get_hopsworks_project()
+    model_registry = project.get_model_registry()
 
-#     models = model_registry.get_models(name=config.MODEL_NAME)
-#     model = max(models, key=lambda model: model.version)
+    models = model_registry.get_models(name=config.MODEL_NAME)
+    model = max(models, key=lambda model: model.version)
 
-#     return model.training_metrics
+    return model.training_metrics
 
 
 # def fetch_next_hour_predictions():
