@@ -129,7 +129,7 @@ def main():
         (2025, [1, 2, 3]),
     ]:
         try:
-            df_year = load_and_process_citibike_data_from_local(
+            df_year = load_and_process_citibike_data_local(
                 year      = year,
                 months    = months,
                 base_path = config.LOCAL_CITIBIKE_DATA_PATH,

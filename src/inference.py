@@ -110,7 +110,7 @@
 
 
 def fetch_predictions(hours):
-    current_hour = (pd.Timestamp.now(tz="Etc/UTC") - timedelta(hours=hours)).floor("h")
+    current_hour = (pd.Timestamp.now(tz="Etc/UTC") - Timedelta(hours=hours)).floor("h")
 
     fs = get_feature_store()
     fg = fs.get_feature_group(name=config.FEATURE_GROUP_MODEL_PREDICTION, version=1)
