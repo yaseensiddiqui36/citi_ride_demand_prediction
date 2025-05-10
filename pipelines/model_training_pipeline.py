@@ -162,7 +162,7 @@ def main():
         input_example  = features.sample(n=1),
         model_schema   = model_schema,
     )
-    model.save(model_path)
+    model.save(str(model_path))
 
     logger.info("✅ Registered new model version with MAE %.4f", test_mae)
 
