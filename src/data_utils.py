@@ -493,7 +493,7 @@ def fetch_batch_raw_data(from_date: Union[datetime, str], to_date: Union[datetim
     to_hist = to_date - timedelta(weeks=52)
 
     months = list(set([from_hist.month, to_hist.month]))
-    data = load_and_process_citibike_data(from_hist.year, months=months)
+    data = load_and_process_citibike_data(months_back=13)
 
     # Rename started_at to pickup_datetime if needed
     if "started_at" in data.columns and "pickup_datetime" not in data.columns:
